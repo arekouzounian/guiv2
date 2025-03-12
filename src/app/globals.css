@@ -17,6 +17,12 @@
   }
 }
 
+@layer utilities {
+  .square {
+    aspect-ratio: 1 / 1;
+  }
+}
+
 body {
   color: var(--foreground);
   background: var(--background);

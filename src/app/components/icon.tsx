@@ -1,0 +1,49 @@
+export interface Icon {
+    id: number;
+    name: string;
+    img: string;
+    x: number;
+    y: number;
+}
+
+interface IconComponentProps {
+    icon: Icon;
+    cellSize: number;
+    isSelected: boolean;
+    onSingleClick: () => void;
+    onDoubleClick: () => void;
+}
+
+export default function IconComponent({
+    icon,
+    cellSize,
+    isSelected,
+    onSingleClick,
+    onDoubleClick,
+}: IconComponentProps) {
+    return (
+        <div
+            onClick={onSingleClick}
+            onDoubleClick={onDoubleClick}
+            className="absolute flex flex-col items-center justify-center"
+            style={{
+                top: icon.y * cellSize,
+                left: icon.x * cellSize,
+                width: `${cellSize}px`,
+                height: `${cellSize}px`,
+                cursor: "pointer",
+                userSelect: "none",
+                border:
+                    isSelected ? "2px solid rgba(128, 128, 128, 0.5)" : "none",
+                transition: "border 0.2s ease",
+            }}
+        >
+            <img
+                src={icon.img}
+                alt={icon.name}
+                className="w-12 h-12 object-contain"
+            />
+            <span className="mt-1 text-xs">{icon.name}</span>
+        </div>
+    );
+}
