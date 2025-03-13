@@ -37,10 +37,6 @@ const WindowComponent: React.FC<WindowComponentProps> = ({
                 style={{
                     top: window.y,
                     left: window.x,
-                    // width: "60%",
-                    // height: "60%",
-                    // maxWidth: "100%",
-                    // maxHeight: "100%",
                     overflow: "hidden",
                     zIndex: window.z,
                 }}

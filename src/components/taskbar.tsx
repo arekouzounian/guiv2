@@ -29,8 +29,8 @@ export default function Taskbar({ height = 50, startButtonHandle }: {height: num
     const [icons,] = useState<TaskBarIconProps[]>([
         {link: "https://blog.arekouzounian.com", iconURL: "/icons/bloggen.svg", title: "Blog"},
         {link: "https://github.com/arekouzounian", iconURL: "/icons/gh-icon.png", title: "Github"},
-        {link: "https://joshbot.xyz", iconURL: "/icons/default.png", title: "Joshbot"},
-        {link: "https://joshbot.xyz/joshle", iconURL: "/icons/default.png", title: "Joshle"},
+        {link: "https://joshbot.xyz", iconURL: "/icons/josh.png", title: "Joshbot"},
+        {link: "https://joshbot.xyz/joshle", iconURL: "/icons/hsoj.png", title: "Joshle"},
     ]);
 
     useEffect(() => {

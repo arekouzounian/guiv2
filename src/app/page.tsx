@@ -20,12 +20,14 @@ export default function DesktopGrid() {
   const [windows, setWindows] = useState<Window[]>([]);
   const [globalZ, setGlobalZ] = useState(2);
 
+
+  // Credit to patorjk.com w/ the ANSI Shadow ASCII Art. This guy's website rules. 
   const [icons,] = useState<Icon[]>([
     { name: "Recycle Bin", img: '/icons/recycle.png', page: null, x: 0, y: 0, out_url: 'https://github.com/arekouzounian' },
     { name: "About", img: '/icons/a.png', page: '/static-html/src/About.html', x: 0, y: 1, out_url: null },
     { name: "Projects", img: '/icons/p.png', page: '/static-html/src/Projects.html', x: 0, y: 2, out_url: null },
     { name: "Contact", img: '/icons/c.png', page: '/static-html/src/Contact.html', x: 0, y: 3, out_url: null },
-    { name: "Resume", img: '/icons/default.png', page: null, x: 0, y: 4, out_url: '/resume.pdf'},
+    { name: "Resume", img: '/icons/notepad.png', page: null, x: 0, y: 4, out_url: '/resume.pdf'},
     { name: "Wordle", img: "/icons/default.png", page: null, x: 0, y: 5, out_url: "https://arekouzounian.com/wordle"},
   ]);
 
