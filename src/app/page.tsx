@@ -68,22 +68,28 @@ export default function DesktopGrid() {
   };
 
   const handleStartButton = () => {
-    const newWindow: Window = {
-      id: windows.length + 1, 
-      title: "Terminal", 
-      url: "https://arekouzounian.com", 
-      x: Math.floor((Math.random() * window.innerWidth) / 3),
-      y: Math.floor((Math.random() * window.innerWidth) / 4),
-      z: globalZ+1
-    };
-    setWindows((prv) => [...prv, newWindow]);
-    setGlobalZ(globalZ + 1);
+    const isMobile = window.innerWidth <= 768;
+    
+    if (!isMobile) {
+      const newWindow: Window = {
+        id: windows.length + 1, 
+        title: "Terminal", 
+        url: "https://arekouzounian.com", 
+        x: Math.floor((Math.random() * window.innerWidth) / 3),
+        y: Math.floor((Math.random() * window.innerWidth) / 4),
+        z: globalZ+1
+      };
+      setWindows((prv) => [...prv, newWindow]);
+      setGlobalZ(globalZ + 1);
+    } else {
+      window.open("https://arekouzounian.com", "_blank");
+    } 
   }
 
 
   return (
     <div
-      className="grid h-screen w-screen touch-manipulation"
+      className="grid h-screen w-fit touch-manipulation overflow-hidden"
       style={{
         gridTemplateRows: `repeat(${rows}, ${cellSize}px)`,
         gridAutoFlow: "column", // Fills top-to-bottom before moving right
