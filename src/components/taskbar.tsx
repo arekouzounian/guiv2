@@ -27,10 +27,10 @@ function TaskBarIcon({
 export default function Taskbar({ height = 50, startButtonHandle }: {height: number, startButtonHandle: React.PointerEventHandler}) {
     const [time, setTime] = useState<string>('');
     const [icons,] = useState<TaskBarIconProps[]>([
-        {link: "https://blog.arekouzounian.com", iconURL: "/icons/bloggen.svg", title: "Blog"},
-        {link: "https://github.com/arekouzounian", iconURL: "/icons/gh-icon.png", title: "Github"},
-        {link: "https://joshbot.xyz", iconURL: "/icons/josh.png", title: "Joshbot"},
-        {link: "https://joshbot.xyz/joshle", iconURL: "/icons/hsoj.png", title: "Joshle"},
+        {link: "https://blog.arekouzounian.com", iconURL: "/images/bloggen.svg", title: "Blog"},
+        {link: "https://github.com/arekouzounian", iconURL: "/images/gh-icon.png", title: "Github"},
+        {link: "https://joshbot.xyz", iconURL: "/images/josh.png", title: "Joshbot"},
+        {link: "https://joshbot.xyz/joshle", iconURL: "/images/hsoj.png", title: "Joshle"},
     ]);
 
     useEffect(() => {
