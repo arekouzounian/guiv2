@@ -29,7 +29,7 @@ const IconComponent: React.FC<IconComponentProps> = ({
             onClick={onSingleClick}
             onDoubleClick={onDoubleClick}
             onTouchEnd={onDoubleClick}
-            className="absolute flex flex-col items-center justify-center"
+            className="absolute flex flex-col items-center justify-center rounded-lg"
             style={{
                 top: icon.y * cellSize,
                 left: icon.x * cellSize,
@@ -40,6 +40,7 @@ const IconComponent: React.FC<IconComponentProps> = ({
                 border:
                     isSelected ? "2px solid rgba(128, 128, 128, 0.5)" : "none",
                 transition: "border 0.2s ease",
+                zIndex: "1"
             }}
         >
             <img
@@ -47,7 +48,7 @@ const IconComponent: React.FC<IconComponentProps> = ({
                 alt={icon.name}
                 className="w-12 h-12 object-contain"
             />
-            <span className="mt-1 text-xs">{icon.name}</span>
+            <span className="mt-1 text-s font-bold drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">{icon.name}</span>
         </div>
     );
 };

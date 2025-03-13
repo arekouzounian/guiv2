@@ -1,11 +1,12 @@
 'use client'
-import { useState, useEffect} from "react";
+import { useState, useEffect } from "react";
 import { Icon } from "../components/icon";
 import { Window } from "../components/window";
 
 import WindowComponent from "../components/window";
 import IconComponent from "../components/icon";
 import Taskbar from "../components/taskbar";
+import SelectionBox from "@/components/selectionBox";
 
 export default function DesktopGrid() {
   const [selectedIcon, setSelectedIcon] = useState<number | null>(null);
@@ -13,14 +14,14 @@ export default function DesktopGrid() {
   const [windows, setWindows] = useState<Window[]>([]);
 
   const [icons,] = useState<Icon[]>([
-    { name: "Recycle Bin", img: '/icons/default.png', page: null, x: 0, y: 0 },
+    { name: "Recycle Bin", img: '/icons/recycle.png', page: null, x: 0, y: 0 },
     { name: "About", img: '/icons/default.png', page: '/static-html/src/About.html', x: 0, y: 1 },
     { name: "Projects", img: '/icons/default.png', page: '/static-html/src/Projects.html', x: 0, y: 2 },
     { name: "Contact", img: '/icons/default.png', page: '/static-html/src/Contact.html', x: 0, y: 3 },
   ]);
 
   const cellSize = 100; // make adjustable rather than fixed px? 
-  const taskbarHeight = 60;
+  const taskbarHeight = 50;
 
   // Calculate number of rows based on screen height
   useEffect(() => {
@@ -78,16 +79,18 @@ export default function DesktopGrid() {
 
       {/* Opened Windows */}
       {windows.map((window) => (
-          <WindowComponent
-            key={window.id}
-            window={window}
-            onClose={() =>
-              setWindows((prevWindows) =>
-                prevWindows.filter((w) => w.id !== window.id)
-              )
-            }
-          />
+        <WindowComponent
+          key={window.id}
+          window={window}
+          onClose={() =>
+            setWindows((prevWindows) =>
+              prevWindows.filter((w) => w.id !== window.id)
+            )
+          }
+        />
       ))}
+
+      <SelectionBox></SelectionBox>
 
 
       <Taskbar height={taskbarHeight} />

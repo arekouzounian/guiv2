@@ -30,14 +30,17 @@ const WindowComponent: React.FC<WindowComponentProps> = ({
             bounds={"body"}
         >
             <div
-                className="absolute border bg-gray-400 p-4 rounded-lg shadow-md text-black pb-10 resize"
+                className="absolute border bg-gray-400 p-4 rounded-lg shadow-md text-black pb-10"
                 ref={nodeRef}
                 style={{
                     top: window.y,
                     left: window.x,
                     width: "60%",
                     height: "60%",
+                    maxWidth: "100%",
+                    maxHeight: "100%",
                     overflow: "hidden",
+                    zIndex: "2"
                 }}
             >
                 <div className="flex justify-between">
@@ -53,7 +56,7 @@ const WindowComponent: React.FC<WindowComponentProps> = ({
                 <iframe
                     src={window.url}
                     title={window.title}
-                    className="w-full h-full mb-2 text-black object-contain touch-manipulation"
+                    className="w-full h-full mb-2 text-black font-bold object-contain touch-manipulation"
                 />
             </div>
         </Draggable>
