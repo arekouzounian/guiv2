@@ -4,6 +4,7 @@ export interface Icon {
     name: string;
     img: string;
     page: string | null;
+    out_url: string | null; 
     x: number;
     y: number;
 }
@@ -14,7 +15,6 @@ interface IconComponentProps {
     isSelected: boolean;
     onSingleClick: () => void;
     onDoubleClick: () => void;
-    
 }
 
 const IconComponent: React.FC<IconComponentProps> = ({

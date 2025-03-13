@@ -11,15 +11,17 @@ export interface Window {
     url: string; 
     x: number;
     y: number;
+    z: number; 
 }
 
 interface WindowComponentProps {
     window: Window;
     onClose: () => void;
+    sendToTop: React.PointerEventHandler<HTMLDivElement>
 }
 
 const WindowComponent: React.FC<WindowComponentProps> = ({
-    window, onClose
+    window, onClose, sendToTop
 }) => {
     const nodeRef = useRef(null!);
     
@@ -40,8 +42,9 @@ const WindowComponent: React.FC<WindowComponentProps> = ({
                     maxWidth: "100%",
                     maxHeight: "100%",
                     overflow: "hidden",
-                    zIndex: "2"
+                    zIndex: window.z,
                 }}
+                onPointerDown={sendToTop}
             >
                 <div className="flex justify-between">
                     <h2 className="text-lg">{window.title}</h2>

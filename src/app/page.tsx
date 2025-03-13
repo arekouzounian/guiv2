@@ -8,16 +8,30 @@ import IconComponent from "../components/icon";
 import Taskbar from "../components/taskbar";
 import SelectionBox from "@/components/selectionBox";
 
+
+/*
+  TODO:
+    - z index scaling for windows 
+    - links to resume, wordle
+    - bottom bar: joshbot, bloggen, joshle, github
+    - draggable icons? 
+*/
+
+
+
 export default function DesktopGrid() {
   const [selectedIcon, setSelectedIcon] = useState<number | null>(null);
   const [rows, setRows] = useState(1);
   const [windows, setWindows] = useState<Window[]>([]);
+  const [globalZ, setGlobalZ] = useState(2);
 
   const [icons,] = useState<Icon[]>([
-    { name: "Recycle Bin", img: '/icons/recycle.png', page: null, x: 0, y: 0 },
-    { name: "About", img: '/icons/default.png', page: '/static-html/src/About.html', x: 0, y: 1 },
-    { name: "Projects", img: '/icons/default.png', page: '/static-html/src/Projects.html', x: 0, y: 2 },
-    { name: "Contact", img: '/icons/default.png', page: '/static-html/src/Contact.html', x: 0, y: 3 },
+    { name: "Recycle Bin", img: '/icons/recycle.png', page: null, x: 0, y: 0, out_url: 'https://github.com/arekouzounian' },
+    { name: "About", img: '/icons/default.png', page: '/static-html/src/About.html', x: 0, y: 1, out_url: null },
+    { name: "Projects", img: '/icons/default.png', page: '/static-html/src/Projects.html', x: 0, y: 2, out_url: null },
+    { name: "Contact", img: '/icons/default.png', page: '/static-html/src/Contact.html', x: 0, y: 3, out_url: null },
+    { name: "Resume", img: '/icons/default.png', page: null, x: 0, y: 4, out_url: '/resume.pdf'},
+    { name: "Wordle", img: "/icons/default.png", page: null, x: 0, y: 5, out_url: "https://arekouzounian.com/wordle"},
   ]);
 
   const cellSize = 100; // make adjustable rather than fixed px? 
@@ -48,8 +62,12 @@ export default function DesktopGrid() {
         url: icons[id].page,
         x: 100,
         y: 100,
+        z: globalZ+1,
       };
       setWindows((prevWindows) => [...prevWindows, newWindow]);
+      setGlobalZ(globalZ + 1);
+    } else if (icons[id].out_url != null) {
+      window.open(icons[id].out_url, '_blank');
     }
   };
 
@@ -86,6 +104,16 @@ export default function DesktopGrid() {
             setWindows((prevWindows) =>
               prevWindows.filter((w) => w.id !== window.id)
             )
+          }
+          sendToTop={() => 
+            setWindows((prevWindows) => 
+            prevWindows.map((w, _idx) => {
+              if (w.id === window.id && w.z < globalZ) {
+                w.z = globalZ + 1;
+                setGlobalZ(globalZ+1);
+              } 
+              return w; 
+            }))
           }
         />
       ))}
