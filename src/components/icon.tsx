@@ -1,9 +1,10 @@
 import React from "react";
 
 export interface Icon {
-    id: number;
+    // id: number;
     name: string;
     img: string;
+    page: string | null;
     x: number;
     y: number;
 }
