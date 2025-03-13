@@ -16,8 +16,6 @@ export default function DesktopGrid() {
     { name: "About", img: '/icons/default.png', page: '/static-html/src/About.html', x: 0, y: 1 },
     { name: "Projects", img: '/icons/default.png', page: '/static-html/src/Projects.html', x: 0, y: 2 },
     { name: "Contact", img: '/icons/default.png', page: '/static-html/src/Contact.html', x: 0, y: 3 },
-    // { id: 5, name: "Settings", img: '/icons/default.png', x: 0, y: 4 },
-    // { id: 6, name: "Games", img: '/icons/default.png', x: 0, y: 5 },
   ]);
   const [windows, setWindows] = useState<Window[]>([]);
 
@@ -26,10 +24,6 @@ export default function DesktopGrid() {
 
   // Calculate number of rows based on screen height
   useEffect(() => {
-    // if (!icons || icons.length === 0) {
-    //   setIcons([{ id: 0, name: "Placeholder", img: 'icons/default.png', x: 0, y: 0 }]); // Fallback if icons are not loaded
-    // }
-
     
     const updateGrid = () => setRows(Math.floor(window.innerHeight / cellSize));
     updateGrid(); // Initial calculation
@@ -61,10 +55,15 @@ export default function DesktopGrid() {
 
   return (
     <div
-      className="grid h-screen w-screen bg-blue-900"
+      className="grid h-screen w-screen touch-manipulation"
       style={{
         gridTemplateRows: `repeat(${rows}, ${cellSize}px)`,
         gridAutoFlow: "column", // Fills top-to-bottom before moving right
+        // backgroundColor: "rgb(26, 31, 59)"
+        backgroundImage: "url('/xp-background.jpg')", 
+        backgroundSize: "cover", 
+        backgroundPosition: "center", 
+        backgroundRepeat: "no-repeat",
       }}
     >
       {icons.map((icon, ind) => (

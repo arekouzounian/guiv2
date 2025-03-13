@@ -3,7 +3,7 @@ import React from "react";
 export interface Window {
     id: number;
     title: string;
-    url: string; // The URL of the content to load in the iframe
+    url: string; 
     x: number;
     y: number;
 }
@@ -36,12 +36,10 @@ const WindowComponent: React.FC<WindowComponentProps> = ({
                     X
                 </button>
             </div>
-            {/* <div className=""> */}
             <iframe
                 src={window.url}
                 title={window.title}
                 className="w-full h-full mb-2 text-black object-contain"
-            // frameBorder={'0'}
             />
             {/* </div> */}
         </div>

@@ -1,7 +1,6 @@
 import React from "react";
 
 export interface Icon {
-    // id: number;
     name: string;
     img: string;
     page: string | null;
