@@ -1,8 +1,12 @@
 'use client'
 import { useState, useEffect } from "react";
-import { Icon } from "./components/icon";
-import IconComponent from "./components/icon";
-import Taskbar from "./components/taskbar";
+import { Icon } from "../components/icon";
+import { Window } from "../components/window";
+
+
+import WindowComponent from "../components/window";
+import IconComponent from "../components/icon";
+import Taskbar from "../components/taskbar";
 
 
 
@@ -17,17 +21,21 @@ export default function DesktopGrid() {
     { id: 5, name: "Settings", img: '/icons/default.png', x: 0, y: 4 },
     { id: 6, name: "Games", img: '/icons/default.png', x: 0, y: 5 },
   ]);
+  const [windows, setWindows] = useState<Window[]>([]);
 
   const cellSize = 100; // make adjustable rather than fixed px? 
   const taskbarHeight = 60;
 
   // Calculate number of rows based on screen height
   useEffect(() => {
+    if (!icons || icons.length === 0) {
+      setIcons([{ id: 0, name: "Placeholder", img: 'icons/default.png', x: 0, y: 0 }]); // Fallback if icons are not loaded
+    }
     const updateGrid = () => setRows(Math.floor(window.innerHeight / cellSize));
     updateGrid(); // Initial calculation
     window.addEventListener("resize", updateGrid);
     return () => window.removeEventListener("resize", updateGrid);
-  }, []);
+  }, [icons]);
 
   const handleSingleClick = (id: number) => {
     if (selectedIcon === id) {
@@ -38,8 +46,14 @@ export default function DesktopGrid() {
   };
 
   const handleDoubleClick = (id: number) => {
-    // Placeholder action for double-click
-    alert(`Double-clicked on ${id}`); 
+    const newWindow: Window = {
+      id: Date.now(), // Unique window ID
+      title: `Window ${id}`,
+      url: "/static-html/src/About.html", // Replace with your static HTML URL or path
+      x: 100, // Initial X position of the window
+      y: 100, // Initial Y position of the window
+    };
+    setWindows((prevWindows) => [...prevWindows, newWindow]);
   };
 
 
@@ -61,6 +75,20 @@ export default function DesktopGrid() {
           onDoubleClick={() => handleDoubleClick(icon.id)}
         />
       ))}
+
+      {/* Opened Windows */}
+      {windows.map((window) => (
+        <WindowComponent
+          key={window.id}
+          window={window}
+          onClose={() =>
+            setWindows((prevWindows) =>
+              prevWindows.filter((w) => w.id !== window.id)
+            )
+          }
+        />
+      ))}
+
 
       <Taskbar height={taskbarHeight} />
     </div>

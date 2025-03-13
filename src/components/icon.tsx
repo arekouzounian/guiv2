@@ -1,3 +1,5 @@
+import React from "react";
+
 export interface Icon {
     id: number;
     name: string;
@@ -14,13 +16,17 @@ interface IconComponentProps {
     onDoubleClick: () => void;
 }
 
-export default function IconComponent({
+const IconComponent: React.FC<IconComponentProps> = ({
     icon,
     cellSize,
     isSelected,
     onSingleClick,
     onDoubleClick,
-}: IconComponentProps) {
+}) => {
+    if (!icon) {
+        return null; // If icon is undefined, return nothing
+    }
+
     return (
         <div
             onClick={onSingleClick}
@@ -46,4 +52,10 @@ export default function IconComponent({
             <span className="mt-1 text-xs">{icon.name}</span>
         </div>
     );
-}
+};
+
+export default IconComponent;
+
+// export function IconComponent({
+// }: IconComponentProps) {
+// }
