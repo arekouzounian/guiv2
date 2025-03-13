@@ -1,5 +1,10 @@
 import React from "react";
 
+import { useRef } from "react";
+
+import Draggable from "react-draggable";
+
+
 export interface Window {
     id: number;
     title: string;
@@ -16,33 +21,42 @@ interface WindowComponentProps {
 const WindowComponent: React.FC<WindowComponentProps> = ({
     window, onClose
 }) => {
+    const nodeRef = useRef(null!);
+    
+
     return (
-        <div
-            className="absolute border bg-gray-400 p-4 rounded-lg shadow-md text-black pb-10"
-            style={{
-                top: window.y,
-                left: window.x,
-                width: "60%",
-                height: "60%",
-                overflow: "hidden",
-            }}
+        <Draggable
+            nodeRef={nodeRef}
+            bounds={"body"}
         >
-            <div className="flex justify-between">
-                <h2 className="text-lg">{window.title}</h2>
-                <button
-                    className="text-red-500 bg-gray-500 px-2"
-                    onClick={onClose}
-                >
-                    X
-                </button>
+            <div
+                className="absolute border bg-gray-400 p-4 rounded-lg shadow-md text-black pb-10 resize"
+                ref={nodeRef}
+                style={{
+                    top: window.y,
+                    left: window.x,
+                    width: "60%",
+                    height: "60%",
+                    overflow: "hidden",
+                }}
+            >
+                <div className="flex justify-between">
+                    <h2 className="text-lg">{window.title}</h2>
+                    <button
+                        className="text-red-500 bg-gray-500 px-2"
+                        onClick={onClose}
+                        onTouchStart={onClose}
+                        >
+                        X
+                    </button>
+                </div>
+                <iframe
+                    src={window.url}
+                    title={window.title}
+                    className="w-full h-full mb-2 text-black object-contain touch-manipulation"
+                />
             </div>
-            <iframe
-                src={window.url}
-                title={window.title}
-                className="w-full h-full mb-2 text-black object-contain"
-            />
-            {/* </div> */}
-        </div>
+        </Draggable>
     );
 
 };

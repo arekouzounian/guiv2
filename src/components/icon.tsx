@@ -14,6 +14,7 @@ interface IconComponentProps {
     isSelected: boolean;
     onSingleClick: () => void;
     onDoubleClick: () => void;
+    
 }
 
 const IconComponent: React.FC<IconComponentProps> = ({
@@ -23,14 +24,11 @@ const IconComponent: React.FC<IconComponentProps> = ({
     onSingleClick,
     onDoubleClick,
 }) => {
-    if (!icon) {
-        return null; // If icon is undefined, return nothing
-    }
-
     return (
         <div
             onClick={onSingleClick}
             onDoubleClick={onDoubleClick}
+            onTouchEnd={onDoubleClick}
             className="absolute flex flex-col items-center justify-center"
             style={{
                 top: icon.y * cellSize,
