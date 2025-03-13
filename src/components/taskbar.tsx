@@ -1,6 +1,7 @@
 'use client'
 import { useEffect, useState } from "react";
 
+
 interface TaskBarIconProps {
     link: string; 
     iconURL: string; 
@@ -13,7 +14,7 @@ function TaskBarIcon({
     return (
         <div className="h-fit w-10 rounded">
             <a href={link} target="_blank">
-                <img src={iconURL} className="rounded-lg aspect-square"/>
+                <img alt={title} src={iconURL} className="rounded-lg aspect-square"/>
                 {/* <p className="text-xs text-center">
                     {title}
                 </p> */}
@@ -23,7 +24,7 @@ function TaskBarIcon({
 }
 
 
-export default function Taskbar({ height = 50 }) {
+export default function Taskbar({ height = 50, startButtonHandle }: {height: number, startButtonHandle: React.PointerEventHandler}) {
     const [time, setTime] = useState<string>('');
     const [icons,] = useState<TaskBarIconProps[]>([
         {link: "https://blog.arekouzounian.com", iconURL: "/icons/bloggen.svg", title: "Blog"},
@@ -48,11 +49,13 @@ export default function Taskbar({ height = 50 }) {
         <div className="fixed bottom-0 left-0 w-full bg-gray-800 flex items-center px-4"
             style={{ height: `${height}px` }}
         >
-            <a href="https://arekouzounian.com">
-                <div className="w-15 h-10 p-5 bg-slate-500 rounded-full flex items-center justify-center text-white font-bold cursor-pointer">
+            {/* <a href="https://arekouzounian.com" target="_blank"> */}
+                <div className="w-15 h-10 p-5 bg-slate-500 rounded-full flex items-center justify-center text-white font-bold cursor-pointer"
+                    onPointerDown={startButtonHandle}
+                >
                     ~
                 </div>
-            </a>
+            {/* </a> */}
 
             <div className="flex gap-4 ml-4">
                 {

@@ -32,15 +32,15 @@ const WindowComponent: React.FC<WindowComponentProps> = ({
             bounds={"body"}
         >
             <div
-                className="absolute border bg-gray-400 p-4 rounded-lg shadow-md text-black pb-10"
+                className="absolute border bg-gray-400 p-4 rounded-lg shadow-md text-black pb-10 w-full md:w-6/10 h-6/10"
                 ref={nodeRef}
                 style={{
                     top: window.y,
                     left: window.x,
-                    width: "60%",
-                    height: "60%",
-                    maxWidth: "100%",
-                    maxHeight: "100%",
+                    // width: "60%",
+                    // height: "60%",
+                    // maxWidth: "100%",
+                    // maxHeight: "100%",
                     overflow: "hidden",
                     zIndex: window.z,
                 }}

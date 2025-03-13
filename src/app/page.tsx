@@ -8,7 +8,6 @@ import IconComponent from "../components/icon";
 import Taskbar from "../components/taskbar";
 import SelectionBox from "@/components/selectionBox";
 
-
 /*
   TODO:
     - add start/help window (with clippy?)
@@ -23,9 +22,9 @@ export default function DesktopGrid() {
 
   const [icons,] = useState<Icon[]>([
     { name: "Recycle Bin", img: '/icons/recycle.png', page: null, x: 0, y: 0, out_url: 'https://github.com/arekouzounian' },
-    { name: "About", img: '/icons/default.png', page: '/static-html/src/About.html', x: 0, y: 1, out_url: null },
-    { name: "Projects", img: '/icons/default.png', page: '/static-html/src/Projects.html', x: 0, y: 2, out_url: null },
-    { name: "Contact", img: '/icons/default.png', page: '/static-html/src/Contact.html', x: 0, y: 3, out_url: null },
+    { name: "About", img: '/icons/a.png', page: '/static-html/src/About.html', x: 0, y: 1, out_url: null },
+    { name: "Projects", img: '/icons/p.png', page: '/static-html/src/Projects.html', x: 0, y: 2, out_url: null },
+    { name: "Contact", img: '/icons/c.png', page: '/static-html/src/Contact.html', x: 0, y: 3, out_url: null },
     { name: "Resume", img: '/icons/default.png', page: null, x: 0, y: 4, out_url: '/resume.pdf'},
     { name: "Wordle", img: "/icons/default.png", page: null, x: 0, y: 5, out_url: "https://arekouzounian.com/wordle"},
   ]);
@@ -55,8 +54,8 @@ export default function DesktopGrid() {
         id: windows.length + 1,
         title: icons[id].name,
         url: icons[id].page,
-        x: 100,
-        y: 100,
+        x: Math.floor((Math.random() * window.innerWidth) / 3),
+        y: Math.floor((Math.random() * window.innerWidth) / 4),
         z: globalZ+1,
       };
       setWindows((prevWindows) => [...prevWindows, newWindow]);
@@ -65,6 +64,19 @@ export default function DesktopGrid() {
       window.open(icons[id].out_url, '_blank');
     }
   };
+
+  const handleStartButton = () => {
+    const newWindow: Window = {
+      id: windows.length + 1, 
+      title: "Terminal", 
+      url: "https://arekouzounian.com", 
+      x: Math.floor((Math.random() * window.innerWidth) / 3),
+      y: Math.floor((Math.random() * window.innerWidth) / 4),
+      z: globalZ+1
+    };
+    setWindows((prv) => [...prv, newWindow]);
+    setGlobalZ(globalZ + 1);
+  }
 
 
   return (
@@ -116,7 +128,7 @@ export default function DesktopGrid() {
       <SelectionBox></SelectionBox>
 
 
-      <Taskbar height={taskbarHeight} />
+      <Taskbar height={taskbarHeight} startButtonHandle={handleStartButton}/>
     </div>
   );
 }
