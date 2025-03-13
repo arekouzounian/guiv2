@@ -11,13 +11,9 @@ import SelectionBox from "@/components/selectionBox";
 
 /*
   TODO:
-    - z index scaling for windows 
-    - links to resume, wordle
-    - bottom bar: joshbot, bloggen, joshle, github
-    - draggable icons? 
+    - add start/help window (with clippy?)
+    - add icons, favicon 
 */
-
-
 
 export default function DesktopGrid() {
   const [selectedIcon, setSelectedIcon] = useState<number | null>(null);
@@ -39,11 +35,10 @@ export default function DesktopGrid() {
 
   // Calculate number of rows based on screen height
   useEffect(() => {
-
     const updateGrid = () => setRows(Math.floor(window.innerHeight / cellSize));
     updateGrid(); // Initial calculation
     window.addEventListener("resize", updateGrid);
-    return () => window.removeEventListener("resize", updateGrid);
+    return () => window.removeEventListener("resize", updateGrid); 
   }, [icons]);
 
   const handleSingleClick = (id: number) => {
@@ -107,7 +102,7 @@ export default function DesktopGrid() {
           }
           sendToTop={() => 
             setWindows((prevWindows) => 
-            prevWindows.map((w, _idx) => {
+            prevWindows.map((w) => {
               if (w.id === window.id && w.z < globalZ) {
                 w.z = globalZ + 1;
                 setGlobalZ(globalZ+1);
