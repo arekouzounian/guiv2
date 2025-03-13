@@ -1,9 +1,36 @@
 'use client'
 import { useEffect, useState } from "react";
 
-export default function Taskbar({ height = 50 }) {
+interface TaskBarIconProps {
+    link: string; 
+    iconURL: string; 
+    title: string; 
+}
 
+function TaskBarIcon({
+    link, iconURL, title
+}: TaskBarIconProps) {
+    return (
+        <div className="h-fit w-10 rounded">
+            <a href={link} target="_blank">
+                <img src={iconURL} className="rounded-lg aspect-square"/>
+                {/* <p className="text-xs text-center">
+                    {title}
+                </p> */}
+            </a>
+        </div>
+    );
+}
+
+
+export default function Taskbar({ height = 50 }) {
     const [time, setTime] = useState<string>('');
+    const [icons,] = useState<TaskBarIconProps[]>([
+        {link: "https://blog.arekouzounian.com", iconURL: "/icons/bloggen.svg", title: "Blog"},
+        {link: "https://github.com/arekouzounian", iconURL: "/icons/gh-icon.png", title: "Github"},
+        {link: "https://joshbot.xyz", iconURL: "/icons/default.png", title: "Joshbot"},
+        {link: "https://joshbot.xyz/joshle", iconURL: "/icons/default.png", title: "Joshle"},
+    ]);
 
     useEffect(() => {
         const updateTime = () => {
@@ -28,9 +55,11 @@ export default function Taskbar({ height = 50 }) {
             </a>
 
             <div className="flex gap-4 ml-4">
-                {/* <div className="w-8 h-8 bg-white/30 rounded"></div>
-                <div className="w-8 h-8 bg-white/30 rounded"></div>
-                <div className="w-8 h-8 bg-white/30 rounded"></div> */}
+                {
+                    icons.map((icon, idx) => 
+                        <TaskBarIcon key={idx} {...icon}></TaskBarIcon>
+                    )
+                }
             </div>
 
             <div className="ml-auto text-white text-sm pr-4">
