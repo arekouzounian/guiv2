@@ -52,12 +52,19 @@ export default function DesktopGrid() {
 
   const handleDoubleClick = (id: number) => {
     if (icons[id].page != null) {
+      let x = Math.floor((Math.random() * window.innerWidth) / 3);
+      let y = Math.floor((Math.random() * window.innerWidth) / 4);
+      if (window.innerWidth <= 768) {
+        x = 0; 
+	y = 0;
+      }
+
       const newWindow: Window = {
         id: windows.length + 1,
         title: icons[id].name,
         url: icons[id].page,
-        x: Math.floor((Math.random() * window.innerWidth) / 3),
-        y: Math.floor((Math.random() * window.innerWidth) / 4),
+	x: x, 
+	y: y,
         z: globalZ+1,
       };
       setWindows((prevWindows) => [...prevWindows, newWindow]);
