@@ -140,8 +140,7 @@ export default function DesktopGrid() {
         />
       ))}
 
-      <SelectionBox></SelectionBox>
-
+      <SelectionBox />
 
       <Taskbar height={taskbarHeight} startButtonHandle={handleStartButton}/>
     </div>

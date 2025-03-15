@@ -10,6 +10,15 @@
   --foreground: #171717;
 }
 
+.radGrad {
+  background: linear-gradient(to bottom, #1B5EBA -10%, #4A9DF1 25%, #1B5EBA 100%);
+  font-family: var(--font-xp)
+}
+
+.exitButtonGrad {
+  background: linear-gradient(to bottom, darkred -10%, red 40%, crimson 80%)
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
